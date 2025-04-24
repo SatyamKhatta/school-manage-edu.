@@ -1,6 +1,4 @@
 const pool = require('../config/db');
-const calculateDistance = require('../utils/calculateDistance');
-
 exports.addSchool = async (req, res) => {
   const { name, address, latitude, longitude } = req.body;
 
@@ -19,31 +17,6 @@ exports.addSchool = async (req, res) => {
     res.status(500).json({ error: 'Database error' });
   }
 };
-
-// exports.listSchools = async (req, res) => {
-//   const userLat = parseFloat(req.query.latitude);
-//   const userLon = parseFloat(req.query.longitude);
-
-//   if (isNaN(userLat) || isNaN(userLon)) {
-//     return res.status(400).json({ error: 'Invalid coordinates' });
-//   }
-
-//   try {
-//     const [schools] = await pool.query('SELECT * FROM schools');
-
-//     const sortedSchools = schools
-//       .map(school => ({
-//         ...school,
-//         distance: calculateDistance(userLat, userLon, school.latitude, school.longitude)
-//       }))
-//       .sort((a, b) => a.distance - b.distance);
-
-//     res.json(sortedSchools);
-//   } catch (error) {
-//     console.error('Error fetching schools:', error);
-//     res.status(500).json({ error: 'Database error' });
-//   }
-// };
 
 
 // Haversine formula
